@@ -23,7 +23,7 @@ def index(request):
 def add(request):
     form = City(city_name = request.GET.get('cityname', 'Варшава'))
     form.save()
-    return render(request,'sities/index.html')
+    return
 
 def list(request):
     all_сities =[]
@@ -39,5 +39,5 @@ def list(request):
 
 def delete(request):
     City.objects.filter(id=request.GET.get('id', 0)).delete()
-    return render(request,'sities/index.html')
+    return
 # Create your views here
