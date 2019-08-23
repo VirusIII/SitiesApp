@@ -1,0 +1,48 @@
+{% load staticfiles  %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static 'css\style.css' %}" type="text/css"/>
+  <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+  <title>Города России</title>
+</head>
+<body>
+  <div class="container">
+    <div class="workBox">
+      <form method="post" class="main-form">
+        {% csrf_token %}
+        {{form.city_name}}
+        <button class="addCity" name="add">
+          <i class="fas fa-plus"></i>
+        </button>
+      </form>
+      <form method="post">
+      {% csrf_token %}
+      <!-- <input type="hidden" value="1" name="list"> -->
+      <button class="showAll"  >
+          <i class="fas fa-th-list"></i>
+        </button>
+      </form>
+    </div>
+    <div class="results-bg" id="results">
+      <div class="results">
+      {% for info in all_info%}
+      <div class="resItems">
+        <text>{{info.city_name}}</text>
+        <form method="post" class="hiden-form">
+          {% csrf_token %}
+        <input type="hidden" value="{{info.city_id}}" name="delete">
+        <button class="delCity" name="delete">
+          <i class="fas fa-minus"></i>
+        </button>
+        </form>
+      </div>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
